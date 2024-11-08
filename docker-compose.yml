@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  inventory-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - MONGO_DB_CONNECTION=
+      - KAFKA_TOPIC=inventory
+      - KAFKA_CONNECTION=localhost:9092
+      - KAFKA_TOPIC_RESPONSE=inventory_response
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev"]
+
+networks:
+  default:
+    driver: bridge
