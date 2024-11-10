@@ -177,4 +177,3 @@ kafkaService.start();
 #### view point of the orderservice
 
 **OrderService** serves as a counterpart to **InventoryService**, with the key distinction that it sends requests to verify inventory levels, debit stock, and log deductions in the **InventoryService** (inventory-trail). The core business logic for handling these requests is encapsulated within LogInventoryTrail.ts. This service ensures seamless processing of inventory updates, including validation, stock level checks, and logging. Meanwhile, InventoryEventListeners in the **InventoryService** acts as a Kafka consumer, listening to events triggered by OrderService and delegating inventory-related tasks to LogInventoryTrail.ts for consistent and efficient inventory management.
-
