@@ -178,7 +178,7 @@ kafkaService.start();
 
 **OrderService** serves as a counterpart to **InventoryService**, with the key distinction that it sends requests to verify inventory levels, debit stock, and log deductions in the **InventoryService** (inventory-trail). The core business logic for handling these requests is encapsulated within LogInventoryTrail.ts. This service ensures seamless processing of inventory updates, including validation, stock level checks, and logging. Meanwhile, InventoryEventListeners in the **InventoryService** acts as a Kafka consumer, listening to events triggered by OrderService and delegating inventory-related tasks to LogInventoryTrail.ts for consistent and efficient inventory management.
 
-### to run, start, build and test the applicatio
+### To start, run test and build the application
 
 To install all dependencies listed in a package.json file
 
@@ -186,19 +186,19 @@ To install all dependencies listed in a package.json file
 npm install
 ```
 
-To build TypeScript code, you can use the following command:
+to Start the application
 
 ```
-npx tsc
+npm run start
 ```
 
-The build is part of the package.json
+To build TypeScript code
 
 ```
 npm run build
 ```
 
-to run a test
+To run a test
 
 ```
 npx jest --config jest.config.ts
