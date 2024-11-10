@@ -27,7 +27,7 @@ export class LogInventoryTrail {
     const existingInventory =
       await this.inventoryRepository.findInventoryByProductId(product_id);
 
-    if (!existingInventory || Object.keys(existingInventory).length === 0) {
+    if (!existingInventory || existingInventory.stock_level === undefined) {
       return { status: false, message: "Product not found in inventory." };
     }
 
@@ -47,6 +47,7 @@ export class LogInventoryTrail {
 
     const trail = new InventoryTrail(product_id, user_id, qty);
     const logResult = await this.inventoryRepository.logInventoryItem(trail);
+
     if (!logResult) {
       return { status: false, message: "Failed to log inventory trail." };
     }
@@ -67,7 +68,7 @@ export class LogInventoryTrail {
       return {
         status: false,
         message:
-          "Product ID, User ID, and Quantity are required and Quantity must be a positive number.",
+          "Product ID, User ID, and Quantity are required. Quantity must be a positive number.",
       };
     }
     return { status: true, message: "" };

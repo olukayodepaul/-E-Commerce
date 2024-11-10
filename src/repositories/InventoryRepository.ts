@@ -86,9 +86,7 @@ export default class InventoryRepository {
     try {
       const stockReduction = await this.collection.findOneAndUpdate(
         { product_id: productId },
-        {
-          $inc: { stock_level: qty },
-        },
+        { $inc: { stock_level: -qty } },
         { returnDocument: "after" }
       );
       return { message: `${stockReduction?._id}`, status: true };
